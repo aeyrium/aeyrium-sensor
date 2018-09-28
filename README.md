@@ -1,6 +1,6 @@
-# aeyrium_sensor
+# Aeyrium Sensor
 
-A new flutter plugin project.
+Flutter plugin for get the Pitch and Roll on Android and iOS. It's using TYPE_ROTATION_VECTOR sensor on Android and DeviceMotion on iOS.
 
 ## Getting Started
 
