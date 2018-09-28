@@ -1,0 +1,26 @@
+name: aeyrium_sensor
+description: A new flutter package project.
+version: 1.0.0
+author: Diego Velásquez <diego@aeyrium.com>
+homepage:
+
+environment:
+  sdk: ">=2.0.0-dev.68.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  test: ^1.3.0
+  flutter_test:
+    sdk: flutter
+
+# For information on the generic Dart part of this file, see the
+# following page: https://www.dartlang.org/tools/pub/pubspec
+
+# The following section is specific to Flutter.
+flutter:
+  plugin:
+    androidPackage: com.aeyrium.sensor
+    pluginClass: AeyriumSensorPlugin
