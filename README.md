@@ -5,13 +5,13 @@
 
 A Flutter sensor plugin which provide easy access to the Pitch and Roll on Android and iOS devices. It was made using TYPE_ROTATION_VECTOR sensor on Android and DeviceMotion on iOS.
 
-## Usage
+## Import
 
 To use this plugin, add `aeyrium_sensor` as a [dependency in your pubspec.yaml file](https://flutter.io/platform-plugins/). For example:
 
 ```yaml
 dependencies:
-  aeyrium_sensor: ^1.0.1
+  aeyrium_sensor: ^1.0.2
 ```
 
 ## Usage
