@@ -71,7 +71,7 @@ public class AeyriumSensorPlugin implements EventChannel.StreamHandler {
       }
     };
   }
-
+  
   private void updateOrientation(float[] rotationVector, EventChannel.EventSink events) {
     float[] rotationMatrix = new float[9];
     SensorManager.getRotationMatrixFromVector(rotationMatrix, rotationVector);
