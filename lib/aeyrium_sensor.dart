@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:flutter/services.dart';
 
 const EventChannel _sensorEventChannel =
@@ -45,5 +46,4 @@ class AeyriumSensor {
   SensorEvent _listToSensorEvent(List<double> list) {
     return SensorEvent(list[0], list[1]);
   }
-  
 }
