@@ -1,5 +1,6 @@
 #import "AeyriumSensorPlugin.h"
 #import <CoreMotion/CoreMotion.h>
+#import <GLKit/GLKit.h>
 
 @implementation AeyriumSensorPlugin
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
@@ -41,10 +42,36 @@ double degrees(double radians) {
    [_motionManager
    startDeviceMotionUpdatesUsingReferenceFrame:CMAttitudeReferenceFrameXArbitraryZVertical toQueue:[[NSOperationQueue alloc] init]
    withHandler:^(CMDeviceMotion* data, NSError* error) {
-     CMAttitude *attitude = data.attitude;
+      CMAttitude *attitude = data.attitude;
      CMQuaternion quat = attitude.quaternion;
-     double pitch = degrees(atan2(2*(quat.x*quat.w + quat.y*quat.z), 1 - 2*quat.x*quat.x - 2*quat.z*quat.z)) - 90.0;
-     double roll = -degrees(atan2(2*(quat.y*quat.w - quat.x*quat.z), 1 - 2*quat.y*quat.y - 2*quat.z*quat.z));
+   
+     CMDeviceMotion *deviceMotion = data;
+     
+     // Correct for the rotation matrix not including the screen orientation:
+     UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
+     float deviceOrientationRadians = 0.0f;
+     if (orientation == UIDeviceOrientationLandscapeLeft) {
+       deviceOrientationRadians = M_PI_2;
+     }
+     if (orientation == UIDeviceOrientationLandscapeRight) {
+       deviceOrientationRadians = -M_PI_2;
+     }
+     if (orientation == UIDeviceOrientationPortraitUpsideDown) {
+       deviceOrientationRadians = M_PI;
+     }
+     GLKMatrix4 baseRotation = GLKMatrix4MakeRotation(deviceOrientationRadians, 0.0f, 1.0f, 1.0f);
+     
+     GLKMatrix4 deviceMotionAttitudeMatrix;
+     CMRotationMatrix a = deviceMotion.attitude.rotationMatrix;
+     deviceMotionAttitudeMatrix
+     = GLKMatrix4Make(a.m11, a.m21, a.m31, 0.0f,
+                      a.m12, a.m22, a.m32, 0.0f,
+                      a.m13, a.m23, a.m33, 0.0f,
+                      0.0f, 0.0f, 0.0f, 1.0f);
+     
+     deviceMotionAttitudeMatrix = GLKMatrix4Multiply(baseRotation, deviceMotionAttitudeMatrix);
+     double pitch = degrees (asin(-deviceMotionAttitudeMatrix.m22));
+     double roll = -degrees(atan2(2*(quat.y*quat.w - quat.x*quat.z), 1 - 2*quat.y*quat.y - 2*quat.z*quat.z)) ;
      sendData(pitch, roll , eventSink);
    }];
   return nil;

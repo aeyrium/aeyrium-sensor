@@ -11,7 +11,7 @@ To use this plugin, add `aeyrium_sensor` as a [dependency in your pubspec.yaml f
 
 ```yaml
 dependencies:
-  aeyrium_sensor: ^1.0.2
+  aeyrium_sensor: ^1.0.3
 ```
 
 ## Usage
