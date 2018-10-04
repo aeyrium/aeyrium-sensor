@@ -11,7 +11,7 @@ To use this plugin, add `aeyrium_sensor` as a [dependency in your pubspec.yaml f
 
 ```yaml
 dependencies:
-  aeyrium_sensor: ^1.0.3
+  aeyrium_sensor: ^1.0.4
 ```
 
 ## Usage
@@ -19,8 +19,8 @@ dependencies:
 ``` dart
 import 'package:aeyrium_sensor/aeyrium_sensor.dart';
 
-AeyriumSensor().sensorEvents.listen((SensorEvent event) {
-      //do something with the event
+AeyriumSensor.sensorEvents.listen((SensorEvent event) {
+      //do something with the event , values expressed in radians
       print("Pitch ${event.pitch} and Roll ${event.roll}")
       
     });

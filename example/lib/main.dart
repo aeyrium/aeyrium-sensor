@@ -17,7 +17,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    _streamSubscriptions = AeyriumSensor().sensorEvents.listen((event) {
+    _streamSubscriptions = AeyriumSensor.sensorEvents.listen((event) {
       setState(() {
         _data = "Pitch ${event.pitch} , Roll ${event.roll}";
       });

@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:test/test.dart';
 
 void main() {
-  test('${AeyriumSensor().sensorEvents} are streamed', () async {
+  test('${AeyriumSensor.sensorEvents} are streamed', () async {
     const String channelName = 'plugins.aeyrium.com/sensor';
     const List<double> sensorData = <double>[1.0, 2.0];
 
@@ -34,7 +34,7 @@ void main() {
       }
     });
 
-    final SensorEvent event = await AeyriumSensor().sensorEvents.first;
+    final SensorEvent event = await AeyriumSensor.sensorEvents.first;
     expect(event.pitch, 1.0);
     expect(event.roll, 2.0);
 

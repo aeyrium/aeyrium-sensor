@@ -70,8 +70,8 @@ double degrees(double radians) {
                       0.0f, 0.0f, 0.0f, 1.0f);
      
      deviceMotionAttitudeMatrix = GLKMatrix4Multiply(baseRotation, deviceMotionAttitudeMatrix);
-     double pitch = degrees (asin(-deviceMotionAttitudeMatrix.m22));
-     double roll = -degrees(atan2(2*(quat.y*quat.w - quat.x*quat.z), 1 - 2*quat.y*quat.y - 2*quat.z*quat.z)) ;
+     double pitch = (asin(-deviceMotionAttitudeMatrix.m22));
+     double roll = -(atan2(2*(quat.y*quat.w - quat.x*quat.z), 1 - 2*quat.y*quat.y - 2*quat.z*quat.z)) ;
      sendData(pitch, roll , eventSink);
    }];
   return nil;
