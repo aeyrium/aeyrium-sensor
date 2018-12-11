@@ -1,11 +1,15 @@
+## [1.0.5] -  12/10/2018
+
+* Fixed roll value calculation for iOS.
+
 ## [1.0.4] -  10/02/2018
 
-* Values are expressed in radians instead of degrees
+* Values are expressed in radians instead of degrees.
 * Use AeyriumSensor.sensorEvents instead of AeyriumSensor().sensorEvents
 
 ## [1.0.3] -  10/02/2018
 
-* Pitch value was fixed when rotate the device on iOS
+* Pitch value was fixed when rotate the device on iOS.
 
 ## [1.0.0 - 1.0.2] -  10/01/2018
 
