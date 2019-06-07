@@ -1,4 +1,4 @@
-## [1.0.5 - 1.0.6] -  12/10/2018
+## [1.0.5 - 1.0.7] -  12/10/2018
 
 * Fixed roll value calculation for iOS.
 
