@@ -21,12 +21,12 @@ class SensorEvent {
 }
 
 class AeyriumSensor {
-  static Stream<SensorEvent> _sensorEvents;
+  static Stream<SensorEvent>? _sensorEvents;
 
   AeyriumSensor._();
 
   /// A broadcast stream of events from the device rotation sensor.
-  static Stream<SensorEvent> get sensorEvents {
+  static Stream<SensorEvent>? get sensorEvents {
     if (_sensorEvents == null) {
       _sensorEvents = _sensorEventChannel
           .receiveBroadcastStream()

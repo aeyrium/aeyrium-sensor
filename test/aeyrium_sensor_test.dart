@@ -15,16 +15,16 @@ void main() {
       BinaryMessages.handlePlatformMessage(
         channelName,
         event,
-        (ByteData reply) {},
+        (ByteData? reply) {},
       );
     }
 
     bool isCanceled = false;
-    BinaryMessages.setMockMessageHandler(channelName, (ByteData message) async {
+    BinaryMessages.setMockMessageHandler(channelName,
+        (ByteData? message) async {
       final MethodCall methodCall = standardMethod.decodeMethodCall(message);
       if (methodCall.method == 'listen') {
         emitEvent(standardMethod.encodeSuccessEnvelope(sensorData));
-        emitEvent(null);
         return standardMethod.encodeSuccessEnvelope(null);
       } else if (methodCall.method == 'cancel') {
         isCanceled = true;
@@ -34,7 +34,7 @@ void main() {
       }
     });
 
-    final SensorEvent event = await AeyriumSensor.sensorEvents.first;
+    final SensorEvent event = await AeyriumSensor.sensorEvents!.first;
     expect(event.pitch, 1.0);
     expect(event.roll, 2.0);
 
