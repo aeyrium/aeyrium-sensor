@@ -3,6 +3,7 @@ package com.aeyrium.sensor;
 import io.flutter.plugin.common.EventChannel;
 import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
+import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -13,7 +14,7 @@ import android.app.Activity;
 import android.content.Context;
 
 /** AeyriumSensorPlugin */
-public class AeyriumSensorPlugin implements EventChannel.StreamHandler {
+public class AeyriumSensorPlugin implements FlutterPlugin, EventChannel.StreamHandler {
 
   private static final String SENSOR_CHANNEL_NAME =
           "plugins.aeyrium.com/sensor";
