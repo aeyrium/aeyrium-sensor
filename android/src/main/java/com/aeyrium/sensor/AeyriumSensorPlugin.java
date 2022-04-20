@@ -58,13 +58,13 @@ public class AeyriumSensorPlugin implements FlutterPlugin, EventChannel.StreamHa
   }
 
   @Override
-  public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
-    channel = new MethodChannel(flutterPluginBinding.getFlutterEngine().getDartExecutor(), "aeyrium_sensor_plugin");
+  public void onAttachedToEngine(@NonNull FlutterPlugin.FlutterPluginBinding binding) {
+    channel = new MethodChannel(binding.getFlutterEngine().getDartExecutor(), "aeyrium_sensor_plugin");
     channel.setMethodCallHandler(this);
   }
 
   @Override
-  public void onDetachedFromEngine(FlutterPluginBinding binding) {
+  public void onDetachedFromEngine(@NonNull FlutterPlugin.FlutterPluginBinding binding) {
     channel.setMethodCallHandler(null);
   }
 
