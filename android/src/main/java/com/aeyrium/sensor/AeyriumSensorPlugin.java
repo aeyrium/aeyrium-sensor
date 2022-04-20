@@ -3,6 +3,10 @@ package com.aeyrium.sensor;
 import io.flutter.plugin.common.EventChannel;
 import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
+import io.flutter.plugin.common.MethodCall;
+import io.flutter.plugin.common.MethodChannel;
+import io.flutter.plugin.common.PluginRegistry;
+import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -13,11 +17,12 @@ import android.app.Activity;
 import android.content.Context;
 
 /** AeyriumSensorPlugin */
-public class AeyriumSensorPlugin implements EventChannel.StreamHandler {
+public class AeyriumSensorPlugin implements FlutterPlugin, EventChannel.StreamHandler {
 
   private static final String SENSOR_CHANNEL_NAME =
           "plugins.aeyrium.com/sensor";
   private static final int SENSOR_DELAY_MICROS = 1000 * 1000;//16 * 1000;
+  private static MethodChannel channel;
   private WindowManager mWindowManager;
   private SensorEventListener sensorEventListener;
   private SensorManager sensorManager;
@@ -48,8 +53,19 @@ public class AeyriumSensorPlugin implements EventChannel.StreamHandler {
   @Override
   public void onCancel(Object arguments) {
     if (sensorManager != null && sensorEventListener != null){
-        sensorManager.unregisterListener(sensorEventListener);
+      sensorManager.unregisterListener(sensorEventListener);
     }
+  }
+
+  @Override
+  public void onAttachedToEngine(@NonNull FlutterPlugin.FlutterPluginBinding binding) {
+    channel = new MethodChannel(binding.getFlutterEngine().getDartExecutor(), "aeyrium_sensor_plugin");
+    channel.setMethodCallHandler(this);
+  }
+
+  @Override
+  public void onDetachedFromEngine(@NonNull FlutterPlugin.FlutterPluginBinding binding) {
+    channel.setMethodCallHandler(null);
   }
 
   SensorEventListener createSensorEventListener(final EventChannel.EventSink events) {
